@@ -3,46 +3,43 @@
   import { faker } from '@faker-js/faker'
 
   import useAPI from '@/composables/useAPI'
-  const { getDepartment } = useAPI()
+  //const { getDepartment } = useAPI()
 
   const selectCard = () => {
     console.log(`${props.employee.name} selected`)
   }
 
   const props = defineProps({
-    employee: {
+    holaday: {
       type: Object,
       required: true,
       default: () => {
         return {
-          createdAt: '2022-01-01',
-          departmentId: '123',
-          email: 'john.doe@example.com',
-          employeeId: '123',
-          name: 'John Doe',
-          quote: 'Really Cool quote',
-          title: 'Position',
-          updatedAt: '2022-01-01',
+          holadayId: '123',
+          holadayName: 'Christmas',
+          countryName: 'USA',
+           holadayDate: 'Dec 2',
+          image: 'https://www.example.com'
         }
       },
     },
   })
 
-  const departmentResponse = await getDepartment(props.employee.departmentId)
-  const department = ref(departmentResponse)
+
 </script>
 
 <template>
+   <RouterLink v-if="props.holaday.holadayId" :to="`/api/holaday/${props.holaday.holadayId}`">
   <div class="card" @click="selectCard">
     <div class="card-image">
-      <img :src="faker.image.url()" alt="" srcset="" />
+      <img :src="props.holaday.image" alt="" srcset="" />
     </div>
     <div class="card-details">
-      <p class="card-details-name">{{ props.employee.name }}</p>
-      <p class="card-details-job">{{ props.employee.title }}, {{ department.name }}</p>
-      <p class="card-details-quote">"{{ props.employee.quote }}"</p>
+      <p class="card-details-name font-poppins">{{ props.holaday.holadayName }}</p>
+
     </div>
   </div>
+  </RouterLink>
 </template>
 
 <style scoped lang="postcss">
