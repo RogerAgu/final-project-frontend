@@ -17,7 +17,7 @@ const api = axios.create({
 
 const getEmployees = async () => {
   loading.value = true
-  const { data, headers } = await api.get('/api/employees', {
+  const { data, headers } = await api.get('/api/holadays', {
     params: {
       page: activePage.value,
       size: pageSize.value,
